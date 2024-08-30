@@ -2,27 +2,22 @@
 
 import Image from "next/image";
 import { ConnectButton } from "thirdweb/react";
-import thirdwebIcon from "@public/thirdweb.svg";
+import thirdwebIcon from "public/thirdweb.svg";
 import { client } from "./client";
+import NFTDisplay from "./components/NFTDisplay";
+
+const sampleNFT = {
+  id: "1234",
+  name: "Cool NFT",
+  imageUrl: "/path/to/nft-image.jpg",
+  description: "This is a really cool NFT!",
+};
 
 export default function Home() {
   return (
-    <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
-      <div className="py-20">
-        <Header />
-
-        <div className="flex justify-center mb-20">
-          <ConnectButton
-            client={client}
-            appMetadata={{
-              name: "Example App",
-              url: "https://example.com",
-            }}
-          />
-        </div>
-
-        <ThirdwebResources />
-      </div>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <h1 className="text-2xl font-bold mb-4">My NFT Collection</h1>
+      <NFTDisplay nft={sampleNFT} />
     </main>
   );
 }
