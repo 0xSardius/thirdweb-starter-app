@@ -1,95 +1,67 @@
-"use client";
-
-import Image from "next/image";
-import { ConnectButton } from "thirdweb/react";
-import thirdwebIcon from "public/thirdweb.svg";
-import { client } from "./client";
-import NFTDisplay from "./components/NFTDisplay";
-
-const sampleNFT = {
-  id: "1234",
-  name: "Cool NFT",
-  imageUrl: "/path/to/nft-image.jpg",
-  description: "This is a really cool NFT!",
-};
+import Link from "next/link";
+import { Header } from "@/components/header/Header";
+import { Footer } from "@/components/footer/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-2xl font-bold mb-4">My NFT Collection</h1>
-      <NFTDisplay nft={sampleNFT} />
-    </main>
+    <div className="py-20">
+      <Header
+        title="Web3 Developer Course"
+        subtitle="Learn how to build web3 applications with the Thirdweb Connect SDK."
+      />
+      <Menu />
+      <Footer />
+    </div>
   );
 }
 
-function Header() {
+function Menu() {
   return (
-    <header className="flex flex-col items-center mb-20 md:mb-20">
-      <Image
-        src={thirdwebIcon}
-        alt=""
-        className="size-[150px] md:size-[150px]"
-        style={{
-          filter: "drop-shadow(0px 0px 24px #a726a9a8)",
-        }}
+    <div className="grid gap-4 lg:grid-cols-3 justify-center px-10">
+      <MenuItem
+        title="ConnectButton"
+        href="/connect-button"
+        description="Learn what our ConnectButton UI component is, how to use it, and how to customize it."
       />
-
-      <h1 className="text-2xl md:text-6xl font-semibold md:font-bold tracking-tighter mb-6 text-zinc-100">
-        thirdweb SDK
-        <span className="text-zinc-300 inline-block mx-1"> + </span>
-        <span className="inline-block -skew-x-6 text-blue-500"> Next.js </span>
-      </h1>
-
-      <p className="text-zinc-300 text-base">
-        Read the{" "}
-        <code className="bg-zinc-800 text-zinc-300 px-2 rounded py-1 text-sm mx-1">
-          README.md
-        </code>{" "}
-        file to get started.
-      </p>
-    </header>
-  );
-}
-
-function ThirdwebResources() {
-  return (
-    <div className="grid gap-4 lg:grid-cols-3 justify-center">
-      <ArticleCard
-        title="thirdweb SDK Docs"
-        href="https://portal.thirdweb.com/typescript/v5"
-        description="thirdweb TypeScript SDK documentation"
+      <MenuItem
+        title="ConnectEmbed"
+        href="/connect-embed"
+        description="Learn what our ConnectEmbed UI component is, how to use it, and how to customize it."
       />
-
-      <ArticleCard
-        title="Components and Hooks"
-        href="https://portal.thirdweb.com/typescript/v5/react"
-        description="Learn about the thirdweb React components and hooks in thirdweb SDK"
+      <MenuItem
+        title="In-App Wallet"
+        href="/in-app-wallets"
+        description="Learn what our In-App Wallets are and how to implement them in your application."
       />
-
-      <ArticleCard
-        title="thirdweb Dashboard"
-        href="https://thirdweb.com/dashboard"
-        description="Deploy, configure, and manage your smart contracts from the dashboard."
+      <MenuItem
+        title="Custom Login Flow"
+        href="/custom-login-flow"
+        description="Learn how to use Connect SDK to build your own custom login flow."
+      />
+      <MenuItem
+        title="Account Abstraction"
+        href="/account-abstraction"
+        description="Learn how to implement account abstraction with ConnectButton."
+      />
+      <MenuItem
+        title="Wallet Connection"
+        href="/wallet-connection"
+        description="Learn how get data and interact with the blockchain with a connected wallet."
       />
     </div>
   );
 }
 
-function ArticleCard(props: {
-  title: string;
-  href: string;
-  description: string;
-}) {
+function MenuItem(props: { title: string; href: string; description: string }) {
   return (
-    <a
-      href={props.href + "?utm_source=next-template"}
-      target="_blank"
+    <Link
+      href={props.href}
       className="flex flex-col border border-zinc-800 p-4 rounded-lg hover:bg-zinc-900 transition-colors hover:border-zinc-700"
     >
       <article>
         <h2 className="text-lg font-semibold mb-2">{props.title}</h2>
         <p className="text-sm text-zinc-400">{props.description}</p>
       </article>
-    </a>
+    </Link>
   );
 }
